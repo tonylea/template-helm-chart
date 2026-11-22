@@ -6,6 +6,9 @@ on:
 
 jobs:
   release:
+    # A repo made from this template creates main with its first push, before its deploy key exists,
+    # so a release then could push its tag but not main.
+    if: ${{ !github.event.created }}
     uses: tonylea/ci-templates/.github/workflows/versioning-common.yml@v1.3.4
     permissions:
       contents: write
